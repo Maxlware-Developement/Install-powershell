@@ -1,3 +1,7 @@
+<p align="center">
+<img width="600" height="140" alt="Maxlware Developement" src="https://github.com/user-attachments/assets/5e3773fe-b95c-4c1a-b64a-6f7376933da1" />
+</p>
+
 <h1 align="center">
 Installation en mode développement
 </h1>
