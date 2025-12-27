@@ -1,32 +1,32 @@
-#!/usr/bin/env bash
+# install.ps1
+$LOG_PREFIX = "[INSTALL]"
 
-LOG_PREFIX="[INSTALL]"
+Write-Host "$LOG_PREFIX Démarrage de l'installation..."
 
-echo "$LOG_PREFIX Démarrage du processus d'installation..."
+# Vérification Node.js
+$node = Get-Command node -ErrorAction SilentlyContinue
+if (-not $node) {
+    Write-Host "$LOG_PREFIX Node.js non trouvé. Téléchargement et installation..."
+    $nodeInstaller = "$env:TEMP\node-v24.12.0-x64.msi"
+    Invoke-WebRequest "https://nodejs.org/dist/v24.12.0/node-v24.12.0-x64.msi" -OutFile $nodeInstaller
+    Read-Host "Appuyez sur Entrée pour lancer l'installation de Node.js"
+    Start-Process msiexec.exe -ArgumentList "/i `"$nodeInstaller`" /quiet /norestart" -Wait
+} else {
+    Write-Host "$LOG_PREFIX Node.js trouvé : $($node.Version)"
+}
 
-# === Vérification Node.js ===
-if ! command -v node >/dev/null 2>&1; then
-    echo "$LOG_PREFIX Node.js non trouvé. Téléchargement et installation..."
-    curl -fsSL https://raw.githubusercontent.com/Maxlware-Developement/Install-powershell/refs/heads/main/nodejs/install.sh | sh
-else
-    echo "$LOG_PREFIX Node.js détecté (version $(node -v))"
-fi
+# Choix logiciel
+Write-Host "`n$LOG_PREFIX Sélectionnez le logiciel à installer :"
+Write-Host "1) Mxlw-browser"
+Write-Host "2) CordLaunch"
+Write-Host "3) BetterShorts"
+Write-Host "0) Quitter"
 
-# === Choix logiciel ===
-echo
-echo "$LOG_PREFIX Sélectionnez le logiciel à installer :"
-echo " 1) Mxlw-browser"
-echo " 2) CordLaunch"
-echo " 3) BetterShorts"
-echo " 0) Quitter"
-echo
-
-read -p "Choix : " CHOICE
-
-case "$CHOICE" in
-    1) curl -fsSL https://raw.githubusercontent.com/Maxlware-Developement/Mxlw-browser/main/install.sh | sh ;;
-    2) curl -fsSL https://raw.githubusercontent.com/Maxlware-Developement/CordLaunch/main/install.sh | sh ;;
-    3) curl -fsSL https://raw.githubusercontent.com/Maxlware-Developement/BetterShorts/main/install.sh | sh ;;
-    0) echo "$LOG_PREFIX Arrêt."; exit 0 ;;
-    *) echo "$LOG_PREFIX Choix invalide."; exit 1 ;;
-esac
+$choice = Read-Host "Votre choix"
+switch ($choice) {
+    "1" { Write-Host "$LOG_PREFIX Installation de Mxlw-browser..." }
+    "2" { Write-Host "$LOG_PREFIX Installation de CordLaunch..." }
+    "3" { Write-Host "$LOG_PREFIX Installation de BetterShorts..." }
+    "0" { Write-Host "$LOG_PREFIX Arrêt."; exit }
+    default { Write-Host "$LOG_PREFIX Choix invalide."; exit 1 }
+}
