@@ -25,7 +25,7 @@ unzip -oq /tmp/bettershorts.zip -d /tmp
 mv /tmp/Mxlw-browser-*/* "$TARGET_DIR"/
 
 echo "$LOG_PREFIX Nettoyage..."
-rm -rf /tmp/mxlw-browser.zip /tmp/bettershorts-*
+rm -rf /tmp/bettershorts.zip /tmp/bettershorts-*
 
 echo "$LOG_PREFIX Installation terminée dans : $TARGET_DIR"
 echo "$LOG_PREFIX Fin du script."
