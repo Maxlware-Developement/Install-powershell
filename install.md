@@ -1,1 +1,1 @@
-powershell -NoProfile -ExecutionPolicy Bypass -Command "iex (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/Maxlware-Developement/Install-powershell/refs/heads/main/nodejs/install.sh'))"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "iex (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/Maxlware-Developement/Install-powershell/refs/heads/main/install.sh'))"
