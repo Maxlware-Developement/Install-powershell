@@ -1,4 +1,7 @@
 # install.ps1
+
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
 $LOG_PREFIX = "[INSTALL]"
 
 Write-Host "$LOG_PREFIX Démarrage du processus d'installation..."
