@@ -1,1 +1,1 @@
-powershell -NoProfile -ExecutionPolicy Bypass -Command "iex (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/Maxlware-Developement/Install-powershell/refs/heads/main/install.sh'))"
+`$dest="$env:TEMP\install.ps1"; Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Maxlware-Developement/Install-powershell/refs/heads/main/install.ps1" -OutFile $dest; powershell -NoProfile -ExecutionPolicy Bypass -File $dest`
