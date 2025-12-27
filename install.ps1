@@ -4,14 +4,12 @@
 
 $LOG_PREFIX = "[INSTALL]"
 
-# Couleurs :
 $COLOR_INFO = "Yellow"
 $COLOR_SUCCESS = "Green"
 $COLOR_ERROR = "Red"
 
 Write-Host "$LOG_PREFIX Démarrage du processus d'installation..." -ForegroundColor $COLOR_INFO
 
-# Vérification Node.js
 $node = Get-Command node -ErrorAction SilentlyContinue
 if (-not $node) {
     Write-Host "$LOG_PREFIX Node.js non trouvé." -ForegroundColor $COLOR_ERROR
@@ -38,20 +36,16 @@ function Install-App($name, $zipUrl) {
     Write-Host "$LOG_PREFIX Installation de $name dans $targetDir" -ForegroundColor $COLOR_INFO
     Read-Host "Appuyez sur Entrée pour confirmer"
     
-    # Créer le dossier cible
     if (-not (Test-Path $targetDir)) { New-Item -ItemType Directory -Path $targetDir | Out-Null }
 
-    # Télécharger le ZIP
     $tmpZip = "$env:TEMP\$name.zip"
     Write-Host "$LOG_PREFIX Téléchargement du ZIP..." -ForegroundColor $COLOR_INFO
     Invoke-WebRequest $zipUrl -OutFile $tmpZip
 
-    # Extraire le ZIP
     Write-Host "$LOG_PREFIX Extraction..." -ForegroundColor $COLOR_INFO
     Add-Type -AssemblyName System.IO.Compression.FileSystem
     [System.IO.Compression.ZipFile]::ExtractToDirectory($tmpZip, $targetDir)
 
-    # Nettoyer
     Remove-Item $tmpZip
     Write-Host "$LOG_PREFIX $name installé avec succès dans $targetDir" -ForegroundColor $COLOR_SUCCESS
 }
