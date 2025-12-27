@@ -25,7 +25,7 @@ unzip -oq /tmp/mxlw-browser.zip -d /tmp
 mv /tmp/Mxlw-browser-*/* "$TARGET_DIR"/
 
 echo "$LOG_PREFIX Nettoyage..."
-rm -rf /tmp/mxlw-browser.zip /tmp/Cordlaunch-*
+rm -rf /tmp/Cordlaunch.zip /tmp/Cordlaunch-*
 
 echo "$LOG_PREFIX Installation terminée dans : $TARGET_DIR"
 echo "$LOG_PREFIX Fin du script."
